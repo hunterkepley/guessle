@@ -30,7 +30,6 @@ def check_word(word):
 
 def compile_guesses(all_words, word, check):
     yellows = []
-    nots = []
     re_str = r'^'
     for i, c in enumerate(word):
         if check[i] == 'g': # Green (match)
@@ -39,7 +38,6 @@ def compile_guesses(all_words, word, check):
             yellows.append(c)
             re_str += r'\w'
         else: # Unknown (any character)
-            nots.append(c)
             re_str += r'\w'
     re_str += r'$'
 
@@ -50,9 +48,6 @@ def compile_guesses(all_words, word, check):
     for y in yellows:
         matched_words = list(filter(lambda x: y in x, matched_words))
 
-    for n in nots:
-        matched_words = list(filter(lambda x: n not in x, matched_words))
-        
     return matched_words
 
 def print_guesses(guesses):
